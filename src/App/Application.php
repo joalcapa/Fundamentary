@@ -21,7 +21,7 @@ class Application {
     public function __construct($path) {
         define("REAL_PATH", $path);
         define("ASSETS_PATH", Dir::assets());
-        require_once ('/../Autoload.php');
+        require_once ('/../Magics.php');
         
         KernelDB::getKernel();  
     }
