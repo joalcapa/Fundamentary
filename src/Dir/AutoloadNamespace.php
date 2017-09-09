@@ -5,6 +5,6 @@
  */
 return [
     '\\',
-    '\\Fundamentary\\\Rest\\RestFull\\',
+    '\\Joalcapa\\Fundamentary\\\Rest\\RestFull\\',
     '\\..\\..\\..\\'
 ];
