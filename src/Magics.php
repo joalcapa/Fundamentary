@@ -15,8 +15,12 @@
  * Inicialización de las variables de entorno
  *
  */
-$dotenv = new Dotenv\Dotenv(REAL_PATH);
-$dotenv->load();
+try {
+    $dotenv = new Dotenv\Dotenv(REAL_PATH);
+    $dotenv->load();
+} catch(Exception $exception) {
+    killer('500');
+}
 
 /**
  * Autocarga de clases con namespaces.
