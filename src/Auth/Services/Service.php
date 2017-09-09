@@ -1,6 +1,6 @@
 <?php
 
-namespace Fundamentary\Auth\Services;
+namespace Joalcapa\Fundamentary\Auth\Services;
 
 interface Service {
     

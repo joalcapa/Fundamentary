@@ -1,10 +1,10 @@
 <?php
 
-namespace Fundamentary\Http;
+namespace Joalcapa\Fundamentary\Http;
 
-use Fundamentary\Dir\Dir as Dir;
-use Fundamentary\Http\Request as Request;
-use Fundamentary\Http\Response as Response;
+use Joalcapa\Fundamentary\Dir\Dir as Dir;
+use Joalcapa\Fundamentary\Http\Request as Request;
+use Joalcapa\Fundamentary\Http\Response as Response;
 
 class Kernel {
     

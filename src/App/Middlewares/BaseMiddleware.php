@@ -1,8 +1,8 @@
 <?php
 
-namespace Fundamentary\App\Middlewares;
+namespace Joalcapa\Fundamentary\App\Middlewares;
 
-use Fundamentary\Rest\Rest as Rest;
+use Joalcapa\Fundamentary\Rest\Rest as Rest;
 
 class BaseMiddleware {
     

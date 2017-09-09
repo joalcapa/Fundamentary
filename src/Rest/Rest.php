@@ -1,9 +1,9 @@
 <?php
 
-namespace Fundamentary\Rest;
+namespace Joalcapa\Fundamentary\Rest;
 
 use Auth;
-use Fundamentary\Dir\Dir as Dir;
+use Joalcapa\Fundamentary\Dir\Dir as Dir;
 
 class Rest {
     

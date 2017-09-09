@@ -1,8 +1,8 @@
 <?php
 
-namespace Fundamentary\Exception;
+namespace Joalcapa\Fundamentary\Exception;
 
-use Fundamentary\Dir\Dir as Dir;
+use Joalcapa\Fundamentary\Dir\Dir as Dir;
 
 class Kernel {
     

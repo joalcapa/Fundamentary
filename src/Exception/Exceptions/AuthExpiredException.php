@@ -1,8 +1,8 @@
 <?php
 
-namespace Fundamentary\Exception\Exceptions;
+namespace Joalcapa\Fundamentary\Exception\Exceptions;
 
-use Fundamentary\Exception\Exceptions\DriverException as DriverException;
+use Joalcapa\Fundamentary\Exception\Exceptions\DriverException as DriverException;
 
 class AuthExpiredException extends DriverException {
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Fundamentary\Auth;
+namespace Joalcapa\Fundamentary\Auth;
 
-use Fundamentary\Auth\Services\ServiceAuth as ServiceAuth;
+use Joalcapa\Fundamentary\Auth\Services\ServiceAuth as ServiceAuth;
 
 class Auth {
     

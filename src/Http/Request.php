@@ -1,8 +1,8 @@
 <?php
 
-namespace Fundamentary\Http;
+namespace Joalcapa\Fundamentary\Http;
 
-use Fundamentary\Http\Interactions\Request\Request as InteractionsRequest;
+use Joalcapa\Fundamentary\Http\Interactions\Request\Request as InteractionsRequest;
 
 class Request {
     

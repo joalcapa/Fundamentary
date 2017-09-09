@@ -1,6 +1,6 @@
 <?php
 
-namespace Fundamentary\Http\Interactions\Request;
+namespace Joalcapa\Fundamentary\Http\Interactions\Request;
 
 class Request {
     

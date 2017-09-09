@@ -1,6 +1,6 @@
 <?php
 
-namespace Fundamentary\Exception\Exceptions;
+namespace Joalcapa\Fundamentary\Exception\Exceptions;
 
 use Exception;
 

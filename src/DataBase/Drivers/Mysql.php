@@ -1,8 +1,8 @@
 <?php
 
-namespace Fundamentary\Database\Drivers;
+namespace Joalcapa\Fundamentary\Database\Drivers;
 
-use Fundamentary\Database\Drivers\DriverDB as DriverDB;
+use Joalcapa\Fundamentary\Database\Drivers\DriverDB as DriverDB;
 
 class Mysql implements DriverDB {
     

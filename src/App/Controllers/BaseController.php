@@ -1,6 +1,6 @@
 <?php
 
-namespace Fundamentary\App\Controllers;
+namespace Joalcapa\Fundamentary\App\Controllers;
 
 class BaseController {
     

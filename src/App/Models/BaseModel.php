@@ -1,9 +1,9 @@
 <?php
 
-namespace Fundamentary\App\Models;
+namespace Joalcapa\Fundamentary\App\Models;
 
-use Fundamentary\Http\Kernel as kernelHttp;
-use Fundamentary\Database\Kernel as KernelDB;
+use Joalcapa\Fundamentary\Http\Kernel as kernelHttp;
+use Joalcapa\Fundamentary\Database\Kernel as KernelDB;
 
 class BaseModel {
     

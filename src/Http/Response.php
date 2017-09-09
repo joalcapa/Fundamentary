@@ -1,6 +1,6 @@
 <?php
 
-namespace Fundamentary\Http;
+namespace Joalcapa\Fundamentary\Http;
 
 class Response {
     

@@ -1,6 +1,6 @@
 <?php
 
-namespace Fundamentary\Database;
+namespace Joalcapa\Fundamentary\Database;
 
 class Newler {
     

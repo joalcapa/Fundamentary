@@ -1,9 +1,9 @@
 <?php
 
-namespace Fundamentary\Database;
+namespace Joalcapa\Fundamentary\Database;
 
-use Fundamentary\Dir\Dir as Dir;
-use Fundamentary\Database\Newler as Newler;
+use Joalcapa\Fundamentary\Dir\Dir as Dir;
+use Joalcapa\Fundamentary\Database\Newler as Newler;
 
 class Kernel {
     

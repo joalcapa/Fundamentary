@@ -1,13 +1,13 @@
 <?php
 
-namespace Fundamentary\Auth\Services;
+namespace Joalcapa\Fundamentary\Auth\Services;
 
 use Auth;
-use Fundamentary\Dir\Dir as Dir;
-use Fundamentary\Database\Kernel as kernelDB;
-use Fundamentary\App\Models\UserModel as User;
-use Fundamentary\Auth\Provider\JWTProvider as JWT;
-use Fundamentary\Auth\Services\Service as Service;
+use Joalcapa\Fundamentary\Dir\Dir as Dir;
+use Joalcapa\Fundamentary\Database\Kernel as kernelDB;
+use Joalcapa\Fundamentary\App\Models\UserModel as User;
+use Joalcapa\Fundamentary\Auth\Provider\JWTProvider as JWT;
+use Joalcapa\Fundamentary\Auth\Services\Service as Service;
 
 class ServiceAuth implements Service {
     

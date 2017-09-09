@@ -1,6 +1,6 @@
 <?php
 
-namespace Fundamentary\Database\Drivers;
+namespace Joalcapa\Fundamentary\Database\Drivers;
 
 interface DriverDB {
     

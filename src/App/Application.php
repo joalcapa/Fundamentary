@@ -1,13 +1,13 @@
 <?php
 
-namespace Fundamentary\App;
+namespace Joalcapa\Fundamentary\App;
 
-use Fundamentary\Dir\Dir as Dir;
-use Fundamentary\Auth\Auth as Auth;
-use Fundamentary\Rest\Rest as Rest;
-use Fundamentary\Database\Kernel as KernelDB;
-use Fundamentary\Exception\Exceptions\KillerException as KillerException;
-use Fundamentary\Exception\Exceptions\AuthExpiredException as AuthExpiredException;
+use Joalcapa\Fundamentary\Dir\Dir as Dir;
+use Joalcapa\Fundamentary\Auth\Auth as Auth;
+use Joalcapa\Fundamentary\Rest\Rest as Rest;
+use Joalcapa\Fundamentary\Database\Kernel as KernelDB;
+use Joalcapa\Fundamentary\Exception\Exceptions\KillerException as KillerException;
+use Joalcapa\Fundamentary\Exception\Exceptions\AuthExpiredException as AuthExpiredException;
 
 class Application {
     
@@ -21,7 +21,7 @@ class Application {
     public function __construct($path) {
         define("REAL_PATH", $path);
         define("ASSETS_PATH", Dir::assets());
-        
+        require_once ('/../Autoload.php');
         
         KernelDB::getKernel();  
     }

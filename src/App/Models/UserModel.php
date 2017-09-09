@@ -1,6 +1,6 @@
 <?php
 
-namespace Fundamentary\App\Models;
+namespace Joalcapa\Fundamentary\App\Models;
 
 use Api\Models\UsersModel as User;
 

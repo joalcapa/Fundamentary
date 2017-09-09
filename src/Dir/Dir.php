@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fundamentary\Dir;
+namespace Joalcapa\Fundamentary\Dir;
 
 class Dir {
     
@@ -106,7 +106,7 @@ class Dir {
      * @return  string
      */
     public static function driverDatabase($nameDriver) {
-        return 'Fundamentary\\Database\\Drivers\\'.$nameDriver;
+        return 'Joalcapa\\Fundamentary\\Database\\Drivers\\'.$nameDriver;
     }
     
     /**
@@ -115,7 +115,7 @@ class Dir {
      * @return  string
      */
     public static function kernelException() {
-        return 'Fundamentary\\Exception\\Kernel';
+        return 'Joalcapa\\Fundamentary\\Exception\\Kernel';
     }
     
     /**
@@ -124,6 +124,6 @@ class Dir {
      * @return  string
      */
     public static function kernelHttp() {
-        return 'Fundamentary\\Http\\Kernel';
+        return 'Joalcapa\\Fundamentary\\Http\\Kernel';
     }
 }
