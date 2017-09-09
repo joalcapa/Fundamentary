@@ -2,7 +2,11 @@
 
 namespace Joalcapa\Fundamentary\Auth\Provider;
 
+<<<<<<< HEAD
 use Firebase\JWT\JWT; 
+=======
+use Firebase\JWT\JWT;
+>>>>>>> dd3095f946d319d6c429eb0d590948b694495e40
 use Joalcapa\Fundamentary\Dir\Dir as Dir;
 use Firebase\JWT\ExpiredException as ExpiredException;
 use Firebase\JWT\SignatureInvalidException as SignatureInvalidException;
