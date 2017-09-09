@@ -16,6 +16,10 @@ class ServiceAuth implements Service {
     public static function validateAuth($request) {   
         $password = $request->input('password');
         $email = $request->input('email'); 
+        
+        if(!isset($password) || !isset($email))
+            killer('511');
+        
         $result = kernelDB::user(self::$userModel, $email, 'EMAIL');
         
         if(isset($result['password'])) 
