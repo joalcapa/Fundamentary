@@ -11,8 +11,13 @@
             "homepage": "https://www.joalcapa.com.ve"
         }
     ],
-    "minimum-stability" : "stable",
+    "autoload": {
+        "psr-4": {
+            "Joalcapa\\Fundamentary\\": "src"
+        }
+    },
     "require": {
         "php": ">=5.3.0"
-    }
+    },
+    "minimum-stability" : "stable"
 }
