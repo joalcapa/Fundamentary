@@ -15,25 +15,12 @@
  * Inicialización de las variables de entorno
  *
  */
-$dotenv = new Dotenv\Dotenv(REAL_PATH);
-$dotenv->load();
-
-/**
- * Autocarga de clases con namespaces.
- *
- * @param  string  $nameClass
- */
-/*
-spl_autoload_register(function($nameClass) { 
-    $pathDir = dirname(__FILE__);
-    $pathsNamespaces = require($pathDir.'\\Joalcapa\\Fundamentary\\dir\\AutoloadNamespace.php');
-    $tokens = explode("\\", $nameClass);
-    
-    foreach($pathsNamespaces as $pathsNamespace) 
-        if(file_exists($pathDir.$pathsNamespace.$nameClass.'.php')) 
-            require($pathDir.$pathsNamespace.$nameClass.'.php');
-});
-*/
+try {
+    $dotenv = new Dotenv\Dotenv(REAL_PATH);
+    $dotenv->load();
+} catch(Exception $exception) {
+    killer('500');
+}
 
 /**
  * Encriptación de datos en modo PASSWORD_BCRYPT.

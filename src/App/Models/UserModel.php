@@ -2,7 +2,7 @@
 
 namespace Joalcapa\Fundamentary\App\Models;
 
-use Api\Models\UsersModel as User;
+use Gauler\Api\Models\UsersModel as User;
 
 class UserModel extends User {
     
@@ -17,7 +17,7 @@ class UserModel extends User {
         foreach($this->tuples as $tuple)
             $tuples[$tuple] = $data[$tuple];
         foreach($this->hidden_tuples as $hidden_tuple)
-            unset($tuples[$hidden_tuple]);
+            unset($tuples[$hidden_tuple]); 
         return $tuples;
     }
 }

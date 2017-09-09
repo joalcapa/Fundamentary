@@ -20,10 +20,7 @@ class Application {
      */
     public function __construct($path) {
         define("REAL_PATH", $path);
-        define("ASSETS_PATH", Dir::assets());
-        require_once ('/../Magics.php');
-        
-        KernelDB::getKernel();  
+        define("ASSETS_PATH", Dir::assets()); 
     }
     
     /**
@@ -49,7 +46,9 @@ class Application {
      */
     public function init() { 
         try {
-        
+            require_once ('/../Magics.php');
+            KernelDB::getKernel(); 
+            
             $kernelHttp = $this->kernels[Dir::kernelHttp()]; 
             $data = Auth::initAuth($kernelHttp::request()); 
             $data ? $this->kernels[Dir::kernelHttp()]->makeResponse('200', $data) : Rest::Apply();

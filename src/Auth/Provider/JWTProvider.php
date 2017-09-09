@@ -1,14 +1,14 @@
 <?php
 
-namespace Fundamentary\Auth\Provider;
+namespace Joalcapa\Fundamentary\Auth\Provider;
 
-use Firebase\JWT\JWT;
-use Fundamentary\Dir\Dir as Dir;
+use Firebase\JWT\JWT; 
+use Joalcapa\Fundamentary\Dir\Dir as Dir;
 use Firebase\JWT\ExpiredException as ExpiredException;
 use Firebase\JWT\SignatureInvalidException as SignatureInvalidException;
 
 class JWTProvider {
-    
+
     /**
      * Proceso de codificación de credenciales, mediante
      * los datos parametrizados y tiempo de expiración.
@@ -17,9 +17,9 @@ class JWTProvider {
      * @param  string  $password
      * @return array
      */
-    public static function credentialsGrant($id, $password) {
+    public static function credentialsGrant($id, $password) {  
         $config = require(Dir::config());
-        $auth = $config['auth'];
+        $auth = $config['auth']; 
         $time = time();
         $token = [
             'iat' => $time, 
@@ -29,6 +29,7 @@ class JWTProvider {
                 'password' => $password
             ]
         ];
+        
         return JWT::encode($token, $auth['key']);     
     }
     

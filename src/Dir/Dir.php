@@ -86,7 +86,7 @@ class Dir {
      * @return  string
      */
     public static function apiControllers($model) {
-        return 'Api\\Controllers\\'.$model.'Controller';
+        return 'Gauler\\Api\\Controllers\\'.$model.'Controller';
     }
     
     /**
@@ -96,7 +96,7 @@ class Dir {
      * @return  string
      */
     public static function apiMiddlewares($model) {
-        return 'Api\\Middlewares\\'.$model.'Middleware';
+        return 'Gauler\\Api\\Middlewares\\'.$model.'Middleware';
     }
     
     /**

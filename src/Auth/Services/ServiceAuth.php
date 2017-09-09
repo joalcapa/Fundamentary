@@ -10,17 +10,21 @@ use Joalcapa\Fundamentary\Auth\Provider\JWTProvider as JWT;
 use Joalcapa\Fundamentary\Auth\Services\Service as Service;
 
 class ServiceAuth implements Service {
-    
+
     public static $userModel = 'Users';
     
     public static function validateAuth($request) {   
         $password = $request->input('password');
         $email = $request->input('email'); 
+        
+        if(!isset($password) || !isset($email))
+            killer('511');
+        
         $result = kernelDB::user(self::$userModel, $email, 'EMAIL');
         
         if(isset($result['password'])) 
             if(verifyBCrypt($password, $result['password'])) 
-                return self::addCredentials($result); 
+                return self::addCredentials($result);  
         
         killer('511');
     }
@@ -75,7 +79,7 @@ class ServiceAuth implements Service {
         
         $user = new User(); 
         if(file_exists(Dir::hypermedia())) { 
-            $hypermedia = require(Dir::hypermedia());
+            $hypermedia = require(Dir::hypermedia()); 
             $cont = 0;
             
             foreach($hypermedia as $hyper) {
@@ -85,6 +89,7 @@ class ServiceAuth implements Service {
                     $arrayHypermedia = [];
                     foreach($hyper as $key => $value)
                         $arrayHypermedia[$key] = str_replace('{{id_user}}', $result['id'], $value);
+
                     return [
                       'user' => $user->getTuples($result),
                       'token' => JWT::credentialsGrant($result['id'], $password),

@@ -12,7 +12,7 @@ class RestFull {
      * @param  string  $model
      * @param  function  $closure
      */
-    public static function model($model, $closure = null) {
+    public static function model($model, $closure = null) {  
         $model = ucwords(strtolower($model));
         $request = KernelHttp::request();
         if($request->getModel() == $model) 
@@ -26,7 +26,7 @@ class RestFull {
      * @param  function  $closure
      * @param  \Fundamentary\Http\Request  $request
      */
-    public static function explorer($model, $closure = null, $request) { 
+    public static function explorer($model, $closure = null, $request) {  
         $data = $request->getInteractionsRequest(); 
        
         if(file_exists(Dir::model($model)) && file_exists(Dir::controller($model))) {  
