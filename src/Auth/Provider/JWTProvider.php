@@ -1,9 +1,9 @@
 <?php
 
-namespace Fundamentary\Auth\Provider;
+namespace Joalcapa\Fundamentary\Auth\Provider;
 
 use Firebase\JWT\JWT;
-use Fundamentary\Dir\Dir as Dir;
+use Joalcapa\Fundamentary\Dir\Dir as Dir;
 use Firebase\JWT\ExpiredException as ExpiredException;
 use Firebase\JWT\SignatureInvalidException as SignatureInvalidException;
 
