@@ -41,29 +41,29 @@ class Mysql implements DriverDB {
     
     public function user($model, $parameter, $parameterString) {
         return $this->query(
-            "SELECT * FROM ".$model
-            ." WHERE ".$parameterString." = '".$parameter
+            "SELECT * FROM ".mysqli_real_escape_string($this->mysqli, $model)
+            ." WHERE ".mysqli_real_escape_string($this->mysqli, $parameterString)." = '".mysqli_real_escape_string($this->mysqli, $parameter)
             ."';");
     }
     
     public function verifyUser($model, $id, $password) {
         return $this->query(
-            "SELECT * FROM ".$model
-            ." WHERE ID = '".$id
-            ."' AND PASSWORD = '".$password
+            "SELECT * FROM ".mysqli_real_escape_string($this->mysqli, $model)
+            ." WHERE ID = '".mysqli_real_escape_string($this->mysqli, $id)
+            ."' AND PASSWORD = '".mysqli_real_escape_string($this->mysqli, $password)
             ."';"); 
     }
     
     public function updatePasswordUser($model, $password, $id) {
         $this->query(
-            "UPDATE LOW_PRIORITY ".$model
-            ." SET PASSWORD = '".$password
-            ."' WHERE ID = '".$id
+            "UPDATE LOW_PRIORITY ".mysqli_real_escape_string($this->mysqli, $model)
+            ." SET PASSWORD = '".mysqli_real_escape_string($this->mysqli, $password)
+            ."' WHERE ID = '".mysqli_real_escape_string($this->mysqli, $id)
             ."'", false);
     }
     
     public function all($model) {
-        $result =  mysqli_query($this->mysqli, "SELECT * FROM ".$model); 
+        $result =  mysqli_query($this->mysqli, "SELECT * FROM ".mysqli_real_escape_string($this->mysqli, $model)); 
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
     
@@ -76,7 +76,7 @@ class Mysql implements DriverDB {
             $query = $query.$item;
             $isAdd = true;
         }
-        $result =  mysqli_query($this->mysqli, "SELECT * FROM ".$model.$query); 
+        $result =  mysqli_query($this->mysqli, "SELECT * FROM ".mysqli_real_escape_string($this->mysqli, $model).$query); 
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
     
@@ -85,9 +85,9 @@ class Mysql implements DriverDB {
             case 'NOT_NULL':
                 return $attribute.' IS NOT NULL ';
             case 'NOT_EQUALS':
-                return $attribute." != '".$value."' ";
+                return $attribute." != '".mysqli_real_escape_string($this->mysqli, $value)."' ";
             case 'EQUALS':
-                return $attribute." = '".$value."' ";
+                return $attribute." = '".mysqli_real_escape_string($this->mysqli, $value)."' ";
             default:
                 break;
         }
@@ -95,14 +95,14 @@ class Mysql implements DriverDB {
     
     public function update($data, $tuples, $model, $id) { 
         $isAdd = false;
-        $query = 'UPDATE LOW_PRIORITY '.$model.' SET ';
+        $query = 'UPDATE LOW_PRIORITY '.mysqli_real_escape_string($this->mysqli, $model).' SET ';
         
         foreach($tuples as $tuple) { 
             if($isAdd && isset($data->$tuple))
                 $query = $query.', ';
             if(isset($data->$tuple)) {
                 $isAdd = true;
-                $query = $query.$tuple."='".$data->$tuple."'";
+                $query = $query.$tuple."='".mysqli_real_escape_string($this->mysqli, $data->$tuple)."'";
             }
         }
             
@@ -112,7 +112,7 @@ class Mysql implements DriverDB {
     
     public function save($data, $tuples, $model) { 
         $isAdd = false;
-        $query = 'INSERT INTO '.$model.' (';
+        $query = 'INSERT INTO '.mysqli_real_escape_string($this->mysqli, $model).' (';
         
         foreach($tuples as $tuple) { 
             if($isAdd && isset($data->$tuple))
@@ -131,7 +131,7 @@ class Mysql implements DriverDB {
                 $query = $query.', ';
             if(isset($data->$tuple)) {
                 $isAdd = true; 
-                $query = $query."'".$data->$tuple."'";
+                $query = $query."'".mysqli_real_escape_string($this->mysqli, $data->$tuple)."'";
             }
         }
           
@@ -140,10 +140,18 @@ class Mysql implements DriverDB {
     }
     
     public function find($model, $id) {
-        return $this->query("SELECT * FROM '.$model.' WHERE id='".$id."' LIMIT 1");
+        return $this->query(
+            "SELECT * FROM ".mysqli_real_escape_string($this->mysqli, $model)
+            ." WHERE id='".mysqli_real_escape_string($this->mysqli, $id)
+            ."' LIMIT 1"
+        );
     }
     
     public function destroy($model, $id) {
-        $this->query("DELETE FROM '.$model.' WHERE id='".$id, false);
+        $this->query(
+            "DELETE FROM ".mysqli_real_escape_string($this->mysqli, $model)
+            ." WHERE id='".mysqli_real_escape_string($this->mysqli, $id)."'",
+            false
+        );
     }
 }
