@@ -89,11 +89,12 @@ class ServiceAuth implements Service {
                     $arrayHypermedia = [];
                     foreach($hyper as $key => $value) {
                         if(!(strpos($value, '{{id_user}}') === false))
-                            $arrayHypermedia[$key] = str_replace('{{id_user}}', $result['id'], $value);
+                            $value = str_replace('{{id_user}}', $result['id'], $value);
                         if(!(strpos($value, 'http:') === false))
-                            $arrayHypermedia[$key] = str_replace('http:', 'https:', $value);
+                            $value = str_replace('http:', 'https:', $value);
                         if(strpos($value, 'http:') === false && strpos($value, 'https:') === false)
-                            $arrayHypermedia[$key] = 'https://'.$value;
+                            $value = 'https://'.$value;
+                        $arrayHypermedia[$key] = $value;
                     }
                     
                     return [
