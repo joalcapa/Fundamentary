@@ -87,9 +87,15 @@ class ServiceAuth implements Service {
                 
                 if($cont == $result['id_rol']) {
                     $arrayHypermedia = [];
-                    foreach($hyper as $key => $value)
-                        $arrayHypermedia[$key] = str_replace('{{id_user}}', $result['id'], $value);
-
+                    foreach($hyper as $key => $value) {
+                        if(!(strpos($value, '{{id_user}}') === false))
+                            $arrayHypermedia[$key] = str_replace('{{id_user}}', $result['id'], $value);
+                        if(!(strpos($value, 'http:') === false))
+                            $arrayHypermedia[$key] = str_replace('http:', 'https:', $value);
+                        if(strpos($value, 'http:') === false && strpos($value, 'https:') === false)
+                            $arrayHypermedia[$key] = 'https://'.$value;
+                    }
+                    
                     return [
                       'user' => $user->getTuples($result),
                       'token' => JWT::credentialsGrant($result['id'], $password),
