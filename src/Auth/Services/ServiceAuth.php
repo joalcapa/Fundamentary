@@ -93,7 +93,7 @@ class ServiceAuth implements Service {
                         if(!(strpos($value, 'http:') === false))
                             $value = str_replace('http:', 'https:', $value);
                         if(strpos($value, 'http:') === false && strpos($value, 'https:') === false)
-                            $value = 'https://'.$value;
+                            $value = 'https:'.$value;
                         $arrayHypermedia[$key] = $value;
                     }
                     
