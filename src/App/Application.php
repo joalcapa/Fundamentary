@@ -21,6 +21,7 @@ class Application {
     public function __construct($path) {
         define("REAL_PATH", $path);
         define("ASSETS_PATH", Dir::assets()); 
+        error_reporting(0);
     }
     
     /**
