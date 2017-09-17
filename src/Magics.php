@@ -100,7 +100,7 @@ function streamingImage($route, $typeData) {
  * @return array
  */
 function queryBuilder($query, $isReturn = true) {
-    return Fundamentary\Database\Kernel::queryBuilder($query, $isReturn);
+    return Joalcapa\Fundamentary\Database\Kernel::queryBuilder($query, $isReturn);
 }
 
 /**
