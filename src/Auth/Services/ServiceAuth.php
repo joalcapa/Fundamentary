@@ -67,17 +67,15 @@ class ServiceAuth implements Service {
         if(isset($result['password']))
             if(verifyBCrypt($password, $result['password'])) {
                 kernelDB::updatePasswordUser(self::$userModel, hashBCrypt($newPassword), $result['id']);
-                return self::addCredentials($result, hashBCrypt($newPassword));
+                return self::addCredentials($result);
             }
         
         killer('401');
     }
     
-    public static function addCredentials($result, $password = null) { 
-        if(!$password)
-            $password = $result['password'];
-        
+    public static function addCredentials($result) { 
         $user = new User(); 
+        $user = $user->getTuples($result);
         if(file_exists(Dir::hypermedia())) { 
             $hypermedia = require(Dir::hypermedia()); 
             $cont = 0;
@@ -98,8 +96,8 @@ class ServiceAuth implements Service {
                     }
                     
                     return [
-                      'user' => $user->getTuples($result),
-                      'token' => JWT::credentialsGrant($result['id'], $password),
+                      'user' => $user,
+                      'token' => JWT::credentialsGrant($user),
                       'hypermedia' => $arrayHypermedia
                     ];
                 }
@@ -107,8 +105,8 @@ class ServiceAuth implements Service {
         }
         
         return [
-               'user' => $user->getTuples($result),
-               'token' => JWT::credentialsGrant($result['id'], $password)
+               'user' => $user,
+               'token' => JWT::credentialsGrant($user)
         ];
     }
 }
