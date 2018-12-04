@@ -77,8 +77,8 @@ class Response {
             $this->sendTypeData(self::DATA_JSON);
         else {
             header(self::CONTENT_TYPE_JSON);
+            http_response_code($this->status);
             $data = [
-                'status' => $codeStatus,
                 'message' => $messageStatus
             ];
             $data = json_encode($data);
@@ -95,8 +95,8 @@ class Response {
         switch($typeData) {
             case self::DATA_JSON:
                 header(self::CONTENT_TYPE_JSON);
+                http_response_code($this->status);
                 $this->data = [
-                    'status' => '200',
                     'message' => 'OK',
                     'data' => $this->data,
                 ];
