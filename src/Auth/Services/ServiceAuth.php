@@ -73,7 +73,7 @@ class ServiceAuth implements Service {
         killer('401');
     }
     
-    public static function addCredentials($result) { 
+    public static function addCredentials($result, $otherParameter = null) { 
         $user = new User(); 
         $user = $user->getTuples($result);
         if(file_exists(Dir::hypermedia())) { 
