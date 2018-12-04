@@ -2,8 +2,6 @@
 
 namespace Joalcapa\Fundamentary\App\Middlewares;
 
-use Joalcapa\Fundamentary\Rest\Rest as Rest;
-
 class BaseMiddleware {
     
     public function __construct() {
@@ -20,19 +18,15 @@ class BaseMiddleware {
     public function apply($request, $model, $method, $id) {  
         switch($method) { 
             case 'POST':
-                Rest::activeRoles($request, 'Store', $model);
                 $data = $this->store($request);
                 break;
             case 'PUT':
-                Rest::activeRoles($request, 'Update', $model);
                 $data = $this->update($request);
                 break;
             case 'DELETE':
-                Rest::activeRoles($request, 'Delete', $model);
                 $data = $this->destroy($request);
                 break;
             default: 
-                $id ? Rest::activeRoles($request, 'Show', $model) : Rest::activeRoles($request, 'Index', $model); 
                 $id ? $data = $this->show($request) : $data = $this->index($request);
                 break;
         }
