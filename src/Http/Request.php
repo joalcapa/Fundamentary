@@ -206,8 +206,12 @@ class Request {
     public function authorizationToken() {
         $headers = apache_request_headers();
         foreach ($headers as $header => $value) 
-            if($header == 'Authorization')
-                return $value;
+            if($header == 'Authorization') {
+                $tokens = explode(" ", $value);
+                if($tokens[0] != 'Bearer' || empty($tokens[1]))
+                    killer('511');
+                return $tokens[1];
+            }
         killer('401');
     }
     
