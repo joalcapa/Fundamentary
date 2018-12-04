@@ -47,7 +47,7 @@ class Application {
      */
     public function init() { 
         try {
-            require_once ('/../Magics.php');
+            require_once (REAL_PATH . '\\vendor\\joalcapa\\fundamentary\\src\\Magics.php');
             KernelDB::getKernel(); 
             
             $kernelHttp = $this->kernels[Dir::kernelHttp()]; 
