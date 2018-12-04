@@ -74,22 +74,18 @@ class RestFull {
     public static function execute($controller, $model, $request) {   
         switch($request->method()) { 
             case 'POST':
-                Rest::activeRoles($request, 'Store', $model);
                 $controller->store($request->getInteractionsRequest());
                 KernelHttp::makeResponse('201');
                 break;
             case 'PUT':
-                Rest::activeRoles($request, 'Update', $model);
                 $controller->update($request->getInteractionsRequest());
                 KernelHttp::makeResponse('200');
                 break;
             case 'DELETE':
-                Rest::activeRoles($request, 'Delete', $model);
                 $controller->destroy($request->getInteractionsRequest());
                 KernelHttp::makeResponse('200');
                 break;
             default: 
-                $request->getRequiredParameter() ? Rest::activeRoles($request, 'Show', $model) : Rest::activeRoles($request, 'Index', $model);
                 $request->getRequiredParameter() ? $data = $controller->show($request->getInteractionsRequest()) : $data = $controller->index($request->getInteractionsRequest()); 
                 KernelHttp::makeResponse('200', $data);
                 break;
