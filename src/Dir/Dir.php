@@ -62,15 +62,6 @@ class Dir {
     }
     
     /**
-     * Directorio de los roles de usuario.
-     *
-     * @return  string
-     */
-    public static function roles() {
-        return REAL_PATH.'\\Api\\roles.php';
-    }
-    
-    /**
      * Directorio del archivo que contiene los datos de hypermedia de usuario.
      *
      * @return  string
