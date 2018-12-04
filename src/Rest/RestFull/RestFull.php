@@ -60,7 +60,7 @@ class RestFull {
      */
     public static function make($model, $request) { 
         $routeController = Dir::apiControllers($model);
-        self::execute(new $routeController(), $model, $request);
+        self::execute(new $routeController(), $request);
     }
     
     /**
@@ -70,7 +70,7 @@ class RestFull {
      * @param  string  $model
      * @param  \Fundamentary\Http\Request  $request
      */
-    public static function execute($controller, $model, $request) {   
+    public static function execute($controller, $request) {   
         switch($request->method()) { 
             case 'POST':
                 $controller->store($request->getInteractionsRequest());
