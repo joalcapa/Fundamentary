@@ -35,10 +35,7 @@ class ServiceAuth implements Service {
         $token = $request->authorizationToken();
         
         $data = JWT::decodeCredentials($token, $auth);
-        if(!isset($data->data->id) || !isset($data->data->password))
-            killer('511');
-        
-        $result = kernelDB::verifyUser(self::$userModel, $data->data->id, $data->data->password);
+        $result = kernelDB::verifyUser(self::$userModel, $data->data->user->id, $data->data->user->password);
         
         if(isset($result['id_rol'])) { 
             Auth::getAuth()->init($result['id'], $result['id_rol'], $result['nombre'], $result['email']); 
@@ -97,7 +94,7 @@ class ServiceAuth implements Service {
                     
                     return [
                       'user' => $user,
-                      'token' => JWT::credentialsGrant($user),
+                      'token' => JWT::credentialsGrant($result),
                       'hypermedia' => $arrayHypermedia
                     ];
                 }
@@ -106,7 +103,7 @@ class ServiceAuth implements Service {
         
         return [
                'user' => $user,
-               'token' => JWT::credentialsGrant($user)
+               'token' => JWT::credentialsGrant($result)
         ];
     }
 }
