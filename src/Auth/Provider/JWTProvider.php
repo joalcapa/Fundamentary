@@ -17,7 +17,7 @@ class JWTProvider {
      * @param  string  $password
      * @return array
      */
-    public static function credentialsGrant($id, $password) {  
+    public static function credentialsGrant($user) {  
         $config = require(Dir::config());
         $auth = $config['auth']; 
         $time = time();
@@ -25,8 +25,7 @@ class JWTProvider {
             'iat' => $time, 
             'exp' => $time + (60*60), 
             'data' => [ 
-                'id' => $id,
-                'password' => $password
+                'user' => $user
             ]
         ];
         
