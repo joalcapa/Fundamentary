@@ -3,7 +3,7 @@
 use Joalcapa\Fundamentary\Dir\Dir as Dir;
 use Joalcapa\Fundamentary\Http\Kernel as KernelHttp;
 
-class RestFull {
+class Rest {
     
     /**
      * Evaluación del modelo Rest.
