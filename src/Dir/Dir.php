@@ -29,7 +29,7 @@ class Dir {
      * @return  string
      */
     public static function model($model) {
-        return REAL_PATH.'\\Api\\Models\\'.$model.'Model.php';
+        return REAL_PATH.'\\App\\Models\\'.$model.'Model.php';
     }
     
     /**
@@ -39,7 +39,7 @@ class Dir {
      * @return  string
      */
     public static function controller($model) {
-        return REAL_PATH.'\\Api\\Controllers\\'.$model.'Controller.php';
+        return REAL_PATH.'\\App\\Controllers\\'.$model.'Controller.php';
     }
     
     /**
@@ -49,7 +49,7 @@ class Dir {
      * @return  string
      */
     public static function middleware($model) {
-        return REAL_PATH.'\\Api\\Middlewares\\'.$model.'Middleware.php';
+        return REAL_PATH.'\\App\\Middlewares\\'.$model.'Middleware.php';
     }
     
     /**
@@ -58,16 +58,7 @@ class Dir {
      * @return  string
      */
     public static function rest() {
-        return REAL_PATH.'\\Api\\rest.php';
-    }
-    
-    /**
-     * Directorio del archivo que contiene los datos de hypermedia de usuario.
-     *
-     * @return  string
-     */
-    public static function hypermedia() {
-        return REAL_PATH.'\\Api\\hypermedia.php';
+        return REAL_PATH.'\\Routes\\rest.php';
     }
     
     /**
@@ -77,7 +68,7 @@ class Dir {
      * @return  string
      */
     public static function apiControllers($model) {
-        return 'Gauler\\Api\\Controllers\\'.$model.'Controller';
+        return 'Gauler\\App\\Controllers\\'.$model.'Controller';
     }
     
     /**
@@ -87,7 +78,7 @@ class Dir {
      * @return  string
      */
     public static function apiMiddlewares($model) {
-        return 'Gauler\\Api\\Middlewares\\'.$model.'Middleware';
+        return 'Gauler\\App\\Middlewares\\'.$model.'Middleware';
     }
     
     /**
