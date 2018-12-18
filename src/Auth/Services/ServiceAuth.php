@@ -73,34 +73,6 @@ class ServiceAuth implements Service {
     public static function addCredentials($result, $otherParameter = null) { 
         $user = new User(); 
         $user = $user->getTuples($result);
-        if(file_exists(Dir::hypermedia())) { 
-            $hypermedia = require(Dir::hypermedia()); 
-            $cont = 0;
-            
-            foreach($hypermedia as $hyper) {
-                $cont++;
-                
-                if($cont == $result['id_rol']) {
-                    $arrayHypermedia = [];
-                    foreach($hyper as $key => $value) {
-                        if(!(strpos($value, '{{id_user}}') === false))
-                            $value = str_replace('{{id_user}}', $result['id'], $value);
-                        if(!(strpos($value, 'http:') === false))
-                            $value = str_replace('http:', 'https:', $value);
-                        if(strpos($value, 'http:') === false && strpos($value, 'https:') === false)
-                            $value = 'https:'.$value;
-                        $arrayHypermedia[$key] = $value;
-                    }
-                    
-                    return [
-                      'user' => $user,
-                      'token' => JWT::credentialsGrant($result),
-                      'hypermedia' => $arrayHypermedia
-                    ];
-                }
-            }
-        }
-        
         return [
                'user' => $user,
                'token' => JWT::credentialsGrant($result)
