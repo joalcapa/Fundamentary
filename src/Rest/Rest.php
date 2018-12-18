@@ -12,7 +12,7 @@ class Rest {
      *
      */
     public static function apply() { 
-        require(__DIR__.'/RestFull/RestFull.php');
+        require(__DIR__.'/RestFull/Rest.php');
         file_exists(Dir::rest()) ? require_once(Dir::rest()) : killer('500');
     }  
 }
