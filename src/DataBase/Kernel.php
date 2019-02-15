@@ -59,7 +59,7 @@ class Kernel {
     private function driver() {
         $config = require(Dir::config());
         $db = $config['database'];
-        
+
         switch(strtolower($db['driver'])) {
             case 'mysql':
                 $driver = Dir::driverDatabase(ucwords(strtolower($db['driver'])));
@@ -68,8 +68,16 @@ class Kernel {
                 $driver = Dir::driverDatabase(ucwords(strtolower($db['driver'])));
                 break;
         }
-        
-        return new $driver($db);
+
+
+
+
+            $ob = new $driver($db);
+
+
+
+
+        return $ob;
     }
     
     public static function user($model, $parameter, $parameterString) {

@@ -8,7 +8,7 @@ class Mysql implements DriverDB {
     
     private $mysqli;
     private $config;
-    
+
     public function __construct($config) {
         $this->config = $config;
     }

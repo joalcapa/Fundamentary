@@ -21,7 +21,7 @@ class Application {
     public function __construct($path) {
         define("REAL_PATH", $path);
         define("ASSETS_PATH", Dir::assets()); 
-        error_reporting(0);
+     //   error_reporting(0);
     }
     
     /**
@@ -45,18 +45,18 @@ class Application {
      * Punto de inicio de la api Rest, proceso de autenticación, busqueda del modelo y generación
      * de la respuesta de la api.
      */
-    public function init() { 
+    public function init() {
         try {
             require_once (REAL_PATH . '\\vendor\\joalcapa\\fundamentary\\src\\Magics.php');
-            KernelDB::getKernel(); 
-            
-            $kernelHttp = $this->kernels[Dir::kernelHttp()]; 
+            KernelDB::getKernel();
+
+            $kernelHttp = $this->kernels[Dir::kernelHttp()];
             $data = Auth::initAuth($kernelHttp::request()); 
             $data ? $this->kernels[Dir::kernelHttp()]->makeResponse('200', $data) : Rest::Apply();
             
             if(!$this->kernels[Dir::kernelHttp()]->response())
                 $this->kernels[Dir::kernelHttp()]->makeResponse('404');
-            
+
         } catch(KillerException $exception) {
             $this->kernels[Dir::kernelException()]->handlerException($exception, $this);
         } catch(AuthExpiredException $exception) {

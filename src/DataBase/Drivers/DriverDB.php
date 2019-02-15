@@ -114,19 +114,19 @@ interface DriverDB {
      * @param  int  $id
      */
     public function destroy($model, $id);
-    
+
     /**
      * Método DB SQL, que permite crear o reemplazar una tabla relacional, perteneciente al modelo Rest en la base de datos destino.
      *
      * @param  string  $table
      * @param  int  $attributes
      */
-    public function createTableOrReplace($table, $attributes);
+    //public function createTableOrReplace($table, $attributes);
     
     /**
      * Método DB SQL, que permite eliminar una tabla relacional, perteneciente al modelo Rest en la base de datos destino.
      *
      * @param  string  $table
      */
-    public function dropTable($table);
+    //public function dropTable($table);
 }

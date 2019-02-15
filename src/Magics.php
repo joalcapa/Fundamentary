@@ -15,6 +15,7 @@
  * Inicialización de las variables de entorno
  *
  */
+
 try {
     $dotenv = new Dotenv\Dotenv(REAL_PATH);
     $dotenv->load();
@@ -188,3 +189,5 @@ class Auth {
         self::$auth->email = $email; 
     }
 }
+
+
