@@ -17,6 +17,7 @@ class Request {
     private $requiredParameter;
     private $relationalParameter;
     private $interactionsRequest;
+    private $rootUrl;
     
     public function __construct() {
         header('Access-Control-Allow-Origin: *');
@@ -50,16 +51,22 @@ class Request {
      */
     private function prepareURL() {
         $this->url = $_SERVER['REQUEST_URI'];
+        $this->rootUrl = false;
         
         if(strpos($this->url, '?')) 
             strstr($this->url, '?', true);
-        
+
         if(strpos($this->url, 'api/') !== false)
             $strSearch = 'api/';
-        else
-            if(strpos($this->url, 'api') !== false)
-               $strSearch = 'api'; 
-        
+        else {
+            if (strpos($this->url, 'api') !== false)
+                $strSearch = 'api';
+            else
+                $this->rootUrl = true;
+        }
+
+        if(empty($strSearch)) return;
+
         $tokens2 = explode($strSearch, $this->url);
         
         if($tokens2[1] != '') {
@@ -88,7 +95,8 @@ class Request {
                     $this->requiredParameter = $tokens[3];
                     break;
             }
-        }
+        } else
+            $this->rootUrl = true;
     }
     
     /**
@@ -224,5 +232,14 @@ class Request {
         if(isset($this->interactionsRequest))
             return $this->interactionsRequest;
         killer('500');
+    }
+
+    /**
+     * Retorno de ruta ajena a la api
+     *
+     * @return boolean
+     */
+    public function isRootUrl() {
+        return $this->rootUrl;
     }
 }

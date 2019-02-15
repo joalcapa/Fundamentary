@@ -21,6 +21,10 @@ class Response {
      */
     public function send() {
         switch($this->status) {
+            case '1':
+                $this->status = 200;
+                $this->sendResponse($this->status, 'Gauler api');
+                break;
             case '200':
                 $this->sendResponse($this->status, 'OK');
                 break;

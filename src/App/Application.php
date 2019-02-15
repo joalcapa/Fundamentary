@@ -51,7 +51,12 @@ class Application {
             KernelDB::getKernel();
 
             $kernelHttp = $this->kernels[Dir::kernelHttp()];
-            $data = Auth::initAuth($kernelHttp::request()); 
+
+            $request = $kernelHttp::request();
+            if($request->isRootUrl())
+                killer('1');
+
+            $data = Auth::initAuth($request);
             $data ? $this->kernels[Dir::kernelHttp()]->makeResponse('200', $data) : Rest::Apply();
             
             if(!$this->kernels[Dir::kernelHttp()]->response())
