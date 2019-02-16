@@ -56,9 +56,11 @@ class Application {
             if($request->isRootUrl())
                 killer('1');
 
-            $data = Auth::initAuth($request);
-            $data ? $this->kernels[Dir::kernelHttp()]->makeResponse('200', $data) : Rest::Apply();
-            
+          //  $data = Auth::initAuth($request);
+          //  $data ? $this->kernels[Dir::kernelHttp()]->makeResponse('200', $data) : Rest::Apply();
+
+            Rest::Apply();
+
             if(!$this->kernels[Dir::kernelHttp()]->response())
                 $this->kernels[Dir::kernelHttp()]->makeResponse('404');
 

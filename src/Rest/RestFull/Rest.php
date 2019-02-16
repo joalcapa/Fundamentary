@@ -26,28 +26,24 @@ class Rest {
      * @param  \Fundamentary\Http\Request  $request
      */
     public static function explorer($model, $closure = null, $request) {  
-        $data = $request->getInteractionsRequest(); 
-       
-        if(file_exists(Dir::model($model)) && file_exists(Dir::controller($model))) {  
+        $data = $request->getInteractionsRequest();
+
+        if(file_exists(Dir::model($model))) {
             require_once(Dir::model($model));
-            require_once(Dir::controller($model));
-           
-            if(!$closure) {
-                if(file_exists(Dir::middleware($model))) { 
-                    require_once(Dir::middleware($model));
-                    $route = Dir::apiMiddlewares($model);
-                    $middleware = new $route();
-                    $data = $middleware->apply($data, $model, $request->method(), $request->getRequiredParameter()); 
-                }
-            } else 
+
+            if($closure)
                 $data = call_user_func_array(
-                $closure,
-                array(
-                    'request' => $data,
-                ));
-                
+                    $closure,
+                    array('request' => $data)
+                );
+
             if($data === $request->getInteractionsRequest())
-                self::make($model, $request);  
+                if(file_exists(Dir::controller($model))) {
+                    require_once(Dir::controller($model));
+                    self::make($model, $request, false);
+                } else
+                    self::make($model, $request, true);
+
         } else 
             killer('401');
     }
@@ -58,9 +54,15 @@ class Rest {
      * @param  string  $model
      * @param  \Fundamentary\Http\Request  $request
      */
-    public static function make($model, $request) { 
-        $routeController = Dir::apiControllers($model);
-        self::execute(new $routeController(), $request);
+    public static function make($model, $request, $isCrudAutomatic) {
+        if($isCrudAutomatic) {
+            $routeController = Dir::baseControllers();
+            $routeController = new $routeController($model);
+        } else {
+            $routeController = Dir::apiControllers($model);
+            $routeController = new $routeController();
+        }
+        self::execute($routeController, $request);
     }
     
     /**

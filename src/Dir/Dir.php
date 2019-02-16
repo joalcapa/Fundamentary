@@ -29,7 +29,7 @@ class Dir {
      * @return  string
      */
     public static function model($model) {
-        return REAL_PATH.'\\App\\Models\\'.$model.'Model.php';
+        return REAL_PATH.'\\Api\\Models\\'.$model.'Model.php';
     }
     
     /**
@@ -39,7 +39,7 @@ class Dir {
      * @return  string
      */
     public static function controller($model) {
-        return REAL_PATH.'\\App\\Controllers\\'.$model.'Controller.php';
+        return REAL_PATH.'\\Api\\Controllers\\'.$model.'Controller.php';
     }
     
     /**
@@ -49,7 +49,7 @@ class Dir {
      * @return  string
      */
     public static function middleware($model) {
-        return REAL_PATH.'\\App\\Middlewares\\'.$model.'Middleware.php';
+        return REAL_PATH.'\\Api\\Middlewares\\'.$model.'Middleware.php';
     }
     
     /**
@@ -68,7 +68,17 @@ class Dir {
      * @return  string
      */
     public static function apiControllers($model) {
-        return 'Gauler\\App\\Controllers\\'.$model.'Controller';
+        return 'Gauler\\Api\\Controllers\\'.$model.'Controller';
+    }
+
+    /**
+     * Directorio del controlador Rest.
+     *
+     * @param  string  $model
+     * @return  string
+     */
+    public static function baseControllers() {
+        return 'Joalcapa\\Fundamentary\\App\\Controllers\\BaseController';
     }
     
     /**
@@ -78,7 +88,7 @@ class Dir {
      * @return  string
      */
     public static function apiMiddlewares($model) {
-        return 'Gauler\\App\\Middlewares\\'.$model.'Middleware';
+        return 'Gauler\\Api\\Middlewares\\'.$model.'Middleware';
     }
     
     /**

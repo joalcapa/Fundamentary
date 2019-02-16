@@ -3,8 +3,12 @@
 namespace Joalcapa\Fundamentary\App\Controllers;
 
 class BaseController {
-    
-    public function __construct() {}
+
+    private $model;
+
+    public function __construct($model = null) {
+        $this->model = $model;
+    }
     
     /**
      * Método REST, asociado al verbo http get, sin parametro requerido en la url.
@@ -13,7 +17,9 @@ class BaseController {
      * @return  array
      */
     public function index($request) {
-        return $request;
+        return [
+            'constroller' => 'base ' . $this->model
+        ];
     }
     
     /**
