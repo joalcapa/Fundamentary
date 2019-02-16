@@ -69,15 +69,7 @@ class Kernel {
                 break;
         }
 
-
-
-
-            $ob = new $driver($db);
-
-
-
-
-        return $ob;
+        return new $driver($db);
     }
     
     public static function user($model, $parameter, $parameterString) {
