@@ -3,6 +3,7 @@
 namespace Joalcapa\Fundamentary\Database\Drivers;
 
 use Joalcapa\Fundamentary\Database\Drivers\DriverDB as DriverDB;
+use Joalcapa\Elementary\Generics\TypeAttrQ as TypeAttrQ;
 
 class Mysql implements DriverDB {
     
@@ -153,5 +154,36 @@ class Mysql implements DriverDB {
             ." WHERE id='".mysqli_real_escape_string($this->mysqli, $id)."'",
             false
         );
+    }
+
+    public function createOrReplaceTable($model, $attributes) {
+        $this->query(
+            'CREATE TABLE '. $model .' (' . $this->prepareAttributesForCreateTable($attributes) .');',
+            false
+        );
+    }
+
+    public function prepareAttributesForCreateTable($attributes) {
+        $str = '';
+        $isFirts = true;
+        foreach ($attributes as $key => $value) {
+
+            switch($value) {
+                case TypeAttrQ::STRING:
+                    $value = 'VARCHAR(30)';
+                    break;
+                case TypeAttrQ::INTEGER:
+                    $value = 'INT';
+                    break;
+                default:
+                    return;
+            }
+
+            $strAttribute = $key.' '.$value;
+            $isFirts == false ? $strAttribute = ', '.$strAttribute : $isFirts = false;
+            $str .= $strAttribute;
+        }
+
+        return $str;
     }
 }

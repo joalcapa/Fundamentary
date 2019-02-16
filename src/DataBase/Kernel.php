@@ -111,4 +111,8 @@ class Kernel {
     public static function find($model, $id) {
         return self::$kernel->providerORM->find($model, $id);
     }
+
+    public static function createOrReplaceTable($model, $attributes) {
+        return self::$kernel->providerORM->createOrReplaceTable($model, $attributes);
+    }
 }

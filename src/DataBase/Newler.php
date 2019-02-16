@@ -63,4 +63,8 @@ class Newler {
     public function typeWhere($typeWhere, $attribute, $value = null) {
         return $this->driverDB->typeWhere($typeWhere, $attribute, $value);
     }
+
+    public function createOrReplaceTable($model, $attributes) {
+        return $this->driverDB->createOrReplaceTable($model, $attributes);
+    }
 }
