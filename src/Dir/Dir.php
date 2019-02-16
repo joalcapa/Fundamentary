@@ -60,6 +60,16 @@ class Dir {
     public static function rest() {
         return REAL_PATH.'\\Routes\\rest.php';
     }
+
+    /**
+     * Directorio del modelo Rest.
+     *
+     * @param  string  $model
+     * @return  string
+     */
+    public static function apiModel($model) {
+        return 'Gauler\\Api\\Models\\'.$model.'Model';
+    }
     
     /**
      * Directorio del controlador Rest.

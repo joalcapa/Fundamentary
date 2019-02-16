@@ -2,6 +2,8 @@
 
 namespace Joalcapa\Fundamentary\App\Controllers;
 
+use Joalcapa\Fundamentary\Dir\Dir as Dir;
+
 class BaseController {
 
     private $model;
@@ -17,9 +19,9 @@ class BaseController {
      * @return  array
      */
     public function index($request) {
-        return [
-            'constroller' => 'base ' . $this->model
-        ];
+        $model = Dir::apiModel($this->model);
+        $data = $model::all();
+        return $data;
     }
     
     /**
