@@ -158,7 +158,10 @@ class Mysql implements DriverDB {
 
     public function createOrReplaceTable($model, $attributes) {
         $this->query(
-            'CREATE TABLE '. $model .' (' . $this->prepareAttributesForCreateTable($attributes) .');',
+            'CREATE TABLE '. $model .' (
+            id INT NOT NULL AUTO_INCREMENT,'
+            . $this->prepareAttributesForCreateTable($attributes) .'
+            ,PRIMARY KEY (id));',
             false
         );
     }
