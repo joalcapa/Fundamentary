@@ -64,7 +64,7 @@ class Mysql implements DriverDB {
     }
     
     public function all($model) {
-        $result =  mysqli_query($this->mysqli, "SELECT * FROM ".mysqli_real_escape_string($this->mysqli, $model)); 
+        $result =  mysqli_query($this->mysqli, "SELECT * FROM ".mysqli_real_escape_string($this->mysqli, $model)." LIMIT 0, 30");
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
     
