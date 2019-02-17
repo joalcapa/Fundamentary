@@ -95,6 +95,7 @@ interface DriverDB {
      * @param  object  $data
      * @param  array  $tuples
      * @param  string  $model
+     * @return  array
      */
     public function save($data, $tuples, $model);
     

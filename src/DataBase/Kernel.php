@@ -97,7 +97,7 @@ class Kernel {
     }
     
     public static function save($data, $tuples, $model) {   
-        self::$kernel->providerORM->save($data, $tuples, $model);
+        return self::$kernel->providerORM->save($data, $tuples, $model);
     }
     
     public static function destroy($model, $id) {

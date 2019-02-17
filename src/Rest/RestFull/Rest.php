@@ -75,8 +75,8 @@ class Rest {
     public static function execute($controller, $request) {   
         switch($request->method()) { 
             case 'POST':
-                $controller->store($request->getInteractionsRequest());
-                KernelHttp::makeResponse('201');
+                $data = $controller->store($request->bodyRequest());
+                KernelHttp::makeResponse('201', $data);
                 break;
             case 'PUT':
                 $controller->update($request->getInteractionsRequest());

@@ -138,6 +138,9 @@ class Mysql implements DriverDB {
           
         $query = $query.')';
         $this->query($query, false);
+
+        $id = mysqli_insert_id($this->mysqli);
+        return $this->find($model, $id);
     }
     
     public function find($model, $id) {

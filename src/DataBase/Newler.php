@@ -50,7 +50,7 @@ class Newler {
     }
     
     public function save($data, $tuples, $model) { 
-        $this->driverDB->save($data, $tuples, $model);
+        return $this->driverDB->save($data, $tuples, $model);
     }
     
     public function destroy($model, $id) {

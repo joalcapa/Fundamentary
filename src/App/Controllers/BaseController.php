@@ -40,7 +40,15 @@ class BaseController {
      * @param  \Fundamentary\Http\Interactions\Request\Request  $request
      */
     public function store($request) {
-        
+        $model = Dir::apiModel($this->model);
+        $model = new $model();
+
+        foreach($model->getTuples() as $tuple)
+            empty($request->$tuple) ? killer('400') : $model->$tuple = $request->$tuple;
+
+        return [
+            'data' => $model->save()
+        ];
     }
     
     /**

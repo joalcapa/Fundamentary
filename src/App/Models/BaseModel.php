@@ -14,7 +14,7 @@ class BaseModel {
      * Método ORM, que permite guardar el objeto relacional, perteneciente al modelo Rest en la base de datos destino.
      */
     public function save() { 
-        KernelDB::save($this, $this->tuples, static::$model);
+        return KernelDB::save($this, $this->tuples, static::$model);
     }
     
     /**
@@ -98,5 +98,14 @@ class BaseModel {
      */
     public static function EQUALS($attribute, $value) {
         return KernelDB::TypeWhere('EQUALS', $attribute, $value);
+    }
+
+    /**
+     * Método que retorna los atributos del modelo
+     *
+     * @return  array
+     */
+    public function getTuples() {
+        return $this->tuples;
     }
 }
