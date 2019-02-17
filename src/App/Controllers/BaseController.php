@@ -71,6 +71,7 @@ class BaseController {
      * @param  \Fundamentary\Http\Interactions\Request\Request  $request
      */
     public function destroy($request) {
-        
+        $model = Dir::apiModel($this->model);
+        $model::destroy($request->id);
     }
 }
