@@ -33,6 +33,23 @@ class BaseModel {
 
         self::updateThis($this, $array);
     }
+
+    /**
+     * Método ORM, que permite actualizar el objeto relacional, perteneciente al modelo Rest ó al modelo en la base de datos destino.
+     *
+     * @param  int  $id
+     */
+    public static function updateRequest($request) {
+        $routeModel = Dir::apiModel(static::$model);
+        $heroe = $routeModel::find($request->id);
+
+        foreach($heroe->getTuples() as $tuple)
+            if(!empty($request->$tuple))
+                $heroe->$tuple = $request->$tuple;
+
+        $heroe->update();
+        return $heroe;
+    }
     
     /**
      * Método ORM, que permite obtener una colección de objetos, pertenecientes al modelo Rest en la base de datos destino.
