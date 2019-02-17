@@ -49,7 +49,8 @@ class BaseController {
         foreach($model->getTuples() as $tuple)
             empty($request->$tuple) ? killer('400') : $model->$tuple = $request->$tuple;
 
-        return $model->save();
+        $model->save();
+        return $model;
     }
     
     /**
@@ -66,7 +67,8 @@ class BaseController {
             if(!empty($request->$tuple))
                 $modelFind->$tuple = $request->$tuple;
 
-        return $modelFind->update();
+        $modelFind->update();
+        return $modelFind;
     }
     
     /**

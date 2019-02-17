@@ -17,7 +17,7 @@ class BaseModel {
     public function save() { 
         $array = KernelDB::save($this, $this->tuples, static::$model);
         $routeModel = Dir::apiModel(static::$model);
-        return self::arrayToModel($routeModel, $array);
+        $this->id = $array['id'];
     }
     
     /**
@@ -31,8 +31,7 @@ class BaseModel {
         else
             $array = KernelDB::update($this, $this->tuples, static::$model, kernelHttp::request()->getRequiredParameter());
 
-        $routeModel = Dir::apiModel(static::$model);
-        return self::arrayToModel($routeModel, $array);
+        self::updateThis($this, $array);
     }
     
     /**
@@ -123,5 +122,11 @@ class BaseModel {
         foreach ($model->tuples as $tuple)
             $model->$tuple = $array[$tuple];
         return $model;
+    }
+
+    public static function updateThis($model, $array) {
+        $model->id = $array['id'];
+        foreach ($model->tuples as $tuple)
+            $model->$tuple = $array[$tuple];
     }
 }
