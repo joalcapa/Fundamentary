@@ -19,6 +19,7 @@ class BaseController {
      * @return  array
      */
     public function index($request) {
+        $this->resolveModel();
         $model = Dir::apiModel($this->model);
         return $model::all();
     }
@@ -30,6 +31,7 @@ class BaseController {
      * @return  array
      */
     public function show($request) {
+        $this->resolveModel();
         $model = Dir::apiModel($this->model);
         return $model::find($request->id);
     }
@@ -40,6 +42,7 @@ class BaseController {
      * @param  \Fundamentary\Http\Interactions\Request\Request  $request
      */
     public function store($request) {
+        $this->resolveModel();
         $model = Dir::apiModel($this->model);
         $model = new $model();
 
@@ -55,6 +58,7 @@ class BaseController {
      * @param  \Fundamentary\Http\Interactions\Request\Request  $request
      */
     public function update($request) {
+        $this->resolveModel();
         $model = Dir::apiModel($this->model);
         $modelFind = $model::find($request->id);
 
@@ -71,7 +75,17 @@ class BaseController {
      * @param  \Fundamentary\Http\Interactions\Request\Request  $request
      */
     public function destroy($request) {
+        $this->resolveModel();
         $model = Dir::apiModel($this->model);
         $model::destroy($request->id);
+    }
+
+    public function resolveModel() {
+        if(empty($this->model)) {
+            $className = get_class($this);
+            $className = str_replace ('Gauler\Api\Controllers\\', '', $className);
+            $className = str_replace ('Controller', '', $className);
+            $this->model = $className;
+        }
     }
 }
