@@ -11,8 +11,7 @@ class Response {
     const CONTENT_TYPE_JSON = 'Content-Type: application/json; charset=utf-8';
     
     public function __construct($status, $data = null) {
-        if($data)
-            $this->data =  $data;
+        $this->data =  $data;
         $this->status = $status;
     }
     
@@ -77,7 +76,7 @@ class Response {
      */
     private function sendResponse($codeStatus, $messageStatus) {
         header('Status: '.$codeStatus.' '.$messageStatus);
-        if($this->data)
+        if(!($this->data === null))
             $this->sendTypeData(self::DATA_JSON);
         else {
             header(self::CONTENT_TYPE_JSON);

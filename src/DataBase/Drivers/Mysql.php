@@ -144,11 +144,16 @@ class Mysql implements DriverDB {
     }
     
     public function find($model, $id) {
-        return $this->query(
+        $data = $this->query(
             "SELECT * FROM ".mysqli_real_escape_string($this->mysqli, $model)
             ." WHERE id='".mysqli_real_escape_string($this->mysqli, $id)
             ."' LIMIT 1"
         );
+
+        if(empty($data))
+            $data = [];
+
+        return $data;
     }
     
     public function destroy($model, $id) {

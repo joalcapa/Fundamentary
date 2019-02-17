@@ -31,7 +31,9 @@ class BaseController {
      * @return  array
      */
     public function show($request) {
-        return $request;
+        $model = Dir::apiModel($this->model);
+        $data = $model::find($request->id);
+        return $data;
     }
     
     /**
