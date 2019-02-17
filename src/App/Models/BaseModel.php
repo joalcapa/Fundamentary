@@ -7,8 +7,21 @@ use Joalcapa\Fundamentary\Http\Kernel as kernelHttp;
 use Joalcapa\Fundamentary\Database\Kernel as KernelDB;
 
 class BaseModel {
-    
-    public function __construct() {
+
+    /**
+     * Constructor ORM, que permite guardar el objeto relacional, perteneciente al modelo Rest en la base de datos destino.
+     *
+     * @param  array  $request
+     */
+    public function __construct($request = null) {
+        if($request) {
+            foreach($this->tuples as $tuple)
+                if(!empty($request->$tuple))
+                    $this->$tuple = $request->$tuple;
+                else
+                    killer('400');
+            $this->save();
+        }
     }
     
     /**
@@ -37,7 +50,7 @@ class BaseModel {
     /**
      * Método ORM, que permite actualizar el objeto relacional, perteneciente al modelo Rest ó al modelo en la base de datos destino.
      *
-     * @param array $request
+     * @param  array  $request
      */
     public static function updateRequest($request) {
         $routeModel = Dir::apiModel(static::$model);
