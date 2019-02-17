@@ -152,7 +152,12 @@ class Request {
     public function bodyRequest() {
         $json = file_get_contents('php://input');
         $data = json_decode($json);
-        return $data;
+
+        $requestWithBodyRequest = $this->getInteractionsRequest();
+        foreach ($data as $key => $value)
+            $requestWithBodyRequest->$key = $value;
+
+        return $requestWithBodyRequest;
     }
     
     /**

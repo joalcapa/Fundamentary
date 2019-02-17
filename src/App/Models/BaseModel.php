@@ -2,6 +2,7 @@
 
 namespace Joalcapa\Fundamentary\App\Models;
 
+use Joalcapa\Fundamentary\Dir\Dir as Dir;
 use Joalcapa\Fundamentary\Http\Kernel as kernelHttp;
 use Joalcapa\Fundamentary\Database\Kernel as KernelDB;
 
@@ -14,7 +15,9 @@ class BaseModel {
      * Método ORM, que permite guardar el objeto relacional, perteneciente al modelo Rest en la base de datos destino.
      */
     public function save() { 
-        return KernelDB::save($this, $this->tuples, static::$model);
+        $array = KernelDB::save($this, $this->tuples, static::$model);
+        $routeModel = Dir::apiModel(static::$model);
+        return self::arrayToModel($routeModel, $array);
     }
     
     /**
@@ -24,9 +27,12 @@ class BaseModel {
      */
     public function update($id = null) {
         if($id)
-            KernelDB::update($this, $this->tuples, static::$model, $id);
+            $array = KernelDB::update($this, $this->tuples, static::$model, $id);
         else
-            KernelDB::update($this, $this->tuples, static::$model, kernelHttp::request()->getRequiredParameter());
+            $array = KernelDB::update($this, $this->tuples, static::$model, kernelHttp::request()->getRequiredParameter());
+
+        $routeModel = Dir::apiModel(static::$model);
+        return self::arrayToModel($routeModel, $array);
     }
     
     /**
@@ -45,7 +51,9 @@ class BaseModel {
      * @return  array
      */
     public static function find($id) { 
-        return KernelDB::find(static::$model, $id);
+        $array = KernelDB::find(static::$model, $id);
+        $routeModel = Dir::apiModel(static::$model);
+        return self::arrayToModel($routeModel, $array);
     }
     
     /**
@@ -107,5 +115,13 @@ class BaseModel {
      */
     public function getTuples() {
         return $this->tuples;
+    }
+
+    public static function arrayToModel($routeModel, $array) {
+        $model = new $routeModel();
+        $model->id = $array['id'];
+        foreach ($model->tuples as $tuple)
+            $model->$tuple = $array[$tuple];
+        return $model;
     }
 }

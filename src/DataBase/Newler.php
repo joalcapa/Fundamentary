@@ -44,7 +44,7 @@ class Newler {
     
     public function update($data, $tuples, $model, $id) {
         if(is_numeric($id))
-            $this->driverDB->update($data, $tuples, $model, $id);
+            return $this->driverDB->update($data, $tuples, $model, $id);
         else
             killer('400');
     }

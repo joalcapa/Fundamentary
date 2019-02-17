@@ -20,8 +20,7 @@ class BaseController {
      */
     public function index($request) {
         $model = Dir::apiModel($this->model);
-        $data = $model::all();
-        return $data;
+        return $model::all();
     }
     
     /**
@@ -32,8 +31,7 @@ class BaseController {
      */
     public function show($request) {
         $model = Dir::apiModel($this->model);
-        $data = $model::find($request->id);
-        return $data;
+        return $model::find($request->id);
     }
     
     /**
@@ -48,9 +46,7 @@ class BaseController {
         foreach($model->getTuples() as $tuple)
             empty($request->$tuple) ? killer('400') : $model->$tuple = $request->$tuple;
 
-        return [
-            'data' => $model->save()
-        ];
+        return $model->save();
     }
     
     /**
@@ -59,7 +55,14 @@ class BaseController {
      * @param  \Fundamentary\Http\Interactions\Request\Request  $request
      */
     public function update($request) {
-        
+        $model = Dir::apiModel($this->model);
+        $modelFind = $model::find($request->id);
+
+        foreach($modelFind->getTuples() as $tuple)
+            if(!empty($request->$tuple))
+                $modelFind->$tuple = $request->$tuple;
+
+        return $modelFind->update();
     }
     
     /**

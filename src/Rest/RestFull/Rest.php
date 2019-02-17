@@ -79,8 +79,8 @@ class Rest {
                 KernelHttp::makeResponse('201', $data);
                 break;
             case 'PUT':
-                $controller->update($request->getInteractionsRequest());
-                KernelHttp::makeResponse('200');
+                $data = $controller->update($request->bodyRequest());
+                KernelHttp::makeResponse('200', $data);
                 break;
             case 'DELETE':
                 $controller->destroy($request->getInteractionsRequest());

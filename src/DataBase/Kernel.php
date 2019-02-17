@@ -93,7 +93,7 @@ class Kernel {
     }
     
     public static function update($data, $tuples, $model, $id) {   
-        self::$kernel->providerORM->update($data, $tuples, $model, $id);
+        return self::$kernel->providerORM->update($data, $tuples, $model, $id);
     }
     
     public static function save($data, $tuples, $model) {   

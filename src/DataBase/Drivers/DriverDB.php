@@ -86,6 +86,7 @@ interface DriverDB {
      * @param  array  $tuples
      * @param  string  $model
      * @param  int  $id
+     * @return  array
      */
     public function update($data, $tuples, $model, $id);
     

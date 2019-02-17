@@ -109,6 +109,7 @@ class Mysql implements DriverDB {
             
         $query = $query." WHERE ID='".$id."'";
         $this->query($query, false);
+        return $this->find($model, $id);
     }
     
     public function save($data, $tuples, $model) { 
@@ -181,7 +182,7 @@ class Mysql implements DriverDB {
 
             switch($value) {
                 case TypeAttrQ::STRING:
-                    $value = 'VARCHAR(30)';
+                    $value = 'VARCHAR(500)';
                     break;
                 case TypeAttrQ::INTEGER:
                     $value = 'INT';
