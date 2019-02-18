@@ -15,8 +15,8 @@ class ServiceAuth implements Service {
     
     public static function validateAuth($request) {   
         $password = $request->input('password');
-        $email = $request->input('email'); 
-        
+        $email = $request->input('email');
+
         if(!isset($password) || !isset($email))
             killer('511');
         
@@ -40,24 +40,24 @@ class ServiceAuth implements Service {
         Auth::getAuth()->init($result['id'], $result['nombre'], $result['email']);
     }
     
-    public static function resetPassword($request) { 
+    public static function resetPassword($request) {
         $password = $request->input('password');
         $newPassword = $request->input('newPassword');
         $email = $request->input('email');
-        
+
         $token = $request->authorizationToken();
         $config = require(Dir::config());
         $auth = $config['auth'];
         $data = JWT::decodeCredentials($token, $auth);
-        
-        if(!isset($data->data->id) || !isset($data->data->password))
+
+        if(!isset($data->data->user->id) || !isset($data->data->user->password))
             killer('511');
-        
-        if(!is_numeric($data->data->id))
+
+        if(!is_numeric($data->data->user->id))
             killer('401');
-        
+
         $result = kernelDB::user(self::$userModel, $email, 'EMAIL');
-        
+
         if(isset($result['password']))
             if(verifyBCrypt($password, $result['password'])) {
                 kernelDB::updatePasswordUser(self::$userModel, hashBCrypt($newPassword), $result['id']);

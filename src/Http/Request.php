@@ -55,7 +55,10 @@ class Request {
 
         if($this->url == '/api/auth' || $this->url == '/api/auth/' )
             $this->login = true;
-        
+
+        if($this->url == '/api/auth/reset-password' || $this->url == '/api/auth/reset-password/' )
+            $this->resetPassword = true;
+
         if(strpos($this->url, '?')) 
             strstr($this->url, '?', true);
 
@@ -68,13 +71,13 @@ class Request {
                 $this->rootUrl = true;
         }
 
+        if($this->login || $this->resetPassword) return;
         if(empty($strSearch)) return;
 
         $tokens2 = explode($strSearch, $this->url);
-        
+
         if($tokens2[1] != '') {
             $tokens = explode("/", $tokens2[1]);
-            
             switch(count($tokens)) {
                 case 1:
                     $this->model = ucwords(strtolower($tokens[0]));
@@ -87,8 +90,6 @@ class Request {
                     $this->relationalModel = ucwords(strtolower($tokens[0]));
                     $this->relationalParameter = $tokens[1];
                     $this->model = ucwords(strtolower($tokens[2]));
-                    if($this->model == 'Resetpassword')
-                        $this->resetPassword = true;
                     break;
                 default:
                     $this->relationalModel = ucwords(strtolower($tokens[0]));
