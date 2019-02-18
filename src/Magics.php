@@ -182,9 +182,8 @@ class Auth {
     
     public function __wakeup() { killer('500'); }
     
-    public function init($id, $idRol, $nombre, $email) {
+    public function init($id, $nombre, $email) {
         self::$auth->id = $id;
-        self::$auth->idRol = $idRol;
         self::$auth->nombre = $nombre;
         self::$auth->email = $email; 
     }

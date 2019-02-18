@@ -34,7 +34,7 @@ class Request {
         if($_SERVER['REQUEST_METHOD'] == "OPTIONS") 
             die();
            
-        $this->login = true;
+        $this->login = false;
         $this->resetPassword = false;
         $this->model = $this->requiredParameter = $this->relationalModel = $this->relationalParameter = null;   
         $this->prepareURL();
@@ -52,6 +52,9 @@ class Request {
     private function prepareURL() {
         $this->url = $_SERVER['REQUEST_URI'];
         $this->rootUrl = false;
+
+        if($this->url == '/api/auth' || $this->url == '/api/auth/' )
+            $this->login = true;
         
         if(strpos($this->url, '?')) 
             strstr($this->url, '?', true);
@@ -70,7 +73,6 @@ class Request {
         $tokens2 = explode($strSearch, $this->url);
         
         if($tokens2[1] != '') {
-            $this->login = false;
             $tokens = explode("/", $tokens2[1]);
             
             switch(count($tokens)) {
