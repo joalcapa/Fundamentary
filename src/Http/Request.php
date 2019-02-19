@@ -42,7 +42,7 @@ class Request {
         $json = file_get_contents('php://input');
         if(isset($json)) {
             $this->inputs = json_decode($json);
-            $this->interactionsRequest = new InteractionsRequest($this->inputs, $this->relationalParameter, $this->requiredParameter);
+            $this->interactionsRequest = new InteractionsRequest($this->inputs, $this->relationalParameter, $this->requiredParameter, $this->relationalModel);
         }
     }
     

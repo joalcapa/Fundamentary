@@ -21,7 +21,18 @@ class BaseController {
     public function index($request) {
         $this->resolveModel();
         $model = Dir::apiModel($this->model);
-        return $model::all();
+
+        if(empty($request->relationalModel))
+            return $model::all();
+        else {
+            $modelRelational = trim(strtolower($request->relationalModel), 's');
+            return $model::where([
+                $model::EQUALS(
+                    $modelRelational.'Id',
+                    $request->idRelational
+                )
+            ]);
+        }
     }
     
     /**
@@ -33,7 +44,22 @@ class BaseController {
     public function show($request) {
         $this->resolveModel();
         $model = Dir::apiModel($this->model);
-        return $model::find($request->id);
+
+        if(empty($request->relationalModel))
+            return $model::find($request->id);
+        else {
+            $modelRelational = trim(strtolower($request->relationalModel), 's');
+            return $model::where([
+                $model::EQUALS(
+                    $modelRelational.'Id',
+                    $request->idRelational
+                ),
+                $model::EQUALS(
+                    'id',
+                    $request->id
+                )
+            ]);
+        }
     }
     
     /**
@@ -46,8 +72,18 @@ class BaseController {
         $model = Dir::apiModel($this->model);
         $model = new $model();
 
-        foreach($model->getTuples() as $tuple)
-            empty($request->$tuple) ? killer('400') : $model->$tuple = $request->$tuple;
+        if(!empty($request->relationalModel)) {
+            $idRelationalModel = trim(strtolower($request->relationalModel), 's');
+            $idRelationalModel =  $idRelationalModel.'Id';
+            $model->$idRelationalModel = $request->idRelational;
+        }
+
+        foreach($model->getTuples() as $tuple) {
+            if(empty($idRelationalModel))
+                empty($request->$tuple) ? killer('400') : $model->$tuple = $request->$tuple;
+            else if($tuple != $idRelationalModel)
+                empty($request->$tuple) ? killer('400') : $model->$tuple = $request->$tuple;
+        }
 
         $model->save();
         return $model;
@@ -62,6 +98,12 @@ class BaseController {
         $this->resolveModel();
         $model = Dir::apiModel($this->model);
         $modelFind = $model::find($request->id);
+
+        if(!empty($request->relationalModel)) {
+            $idRelationalModel = trim(strtolower($request->relationalModel), 's');
+            $idRelationalModel =  $idRelationalModel.'Id';
+            if($modelFind->$idRelationalModel != $request->idRelational) killer('400');
+        }
 
         foreach($modelFind->getTuples() as $tuple)
             if(!empty($request->$tuple))
@@ -79,6 +121,24 @@ class BaseController {
     public function destroy($request) {
         $this->resolveModel();
         $model = Dir::apiModel($this->model);
+
+        if(!empty($request->relationalModel)) {
+            $modelRelational = trim(strtolower($request->relationalModel), 's');
+            $item = $model::where([
+                $model::EQUALS(
+                    $modelRelational.'Id',
+                    $request->idRelational
+                ),
+                $model::EQUALS(
+                    'id',
+                    $request->id
+                )
+            ]);
+
+            if(sizeof($item) != 1)
+                killer('400');
+        }
+
         $model::destroy($request->id);
     }
 

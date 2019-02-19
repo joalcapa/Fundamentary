@@ -37,7 +37,7 @@ class ServiceAuth implements Service {
         $data = JWT::decodeCredentials($token, $auth);
         $result = kernelDB::verifyUser(self::$userModel, $data->data->user->id, $data->data->user->password);
 
-        Auth::getAuth()->init($result['id'], $result['nombre'], $result['email']);
+        Auth::getAuth()->init($result['id'], $result['name'], $result['email']);
     }
     
     public static function resetPassword($request) {
