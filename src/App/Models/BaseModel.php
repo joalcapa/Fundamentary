@@ -138,6 +138,16 @@ class BaseModel {
     }
 
     /**
+     * Método ORM, que permite obtener la syntaxis del gestor de base de datos destino.
+     *
+     * @param  array  $where
+     * @return  string
+     */
+    public static function OR($where) {
+        return KernelDB::OR($where);
+    }
+
+    /**
      * Método que retorna los atributos del modelo
      *
      * @return  array

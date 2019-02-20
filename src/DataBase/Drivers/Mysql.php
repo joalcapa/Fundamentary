@@ -72,13 +72,57 @@ class Mysql implements DriverDB {
         $query = ' WHERE ';
         $isAdd = false;
         foreach ($where as $item) {
-            if($isAdd)
-                $query = $query.' AND ';
-            $query = $query.$item;
+            if ($isAdd)
+                $query = $this->prepareQuery($query, $item);
+            $query = $this->writeQuery($query, $item);
             $isAdd = true;
         }
+
         $result =  mysqli_query($this->mysqli, "SELECT * FROM ".mysqli_real_escape_string($this->mysqli, $model).$query); 
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+
+    public function writeQuery($query, $itemQuery) {
+        $isAdd = false;
+        if(is_array($itemQuery)) {
+            $query = $query . '( ';
+            $query = $query . $itemQuery['query'];
+            $query = $query . ')';
+        } else
+            $query = $query . $itemQuery;
+
+        return $query;
+    }
+
+    public function prepareQuery($query, $item) {
+        if(is_array($item))
+            switch($item['type']) {
+                case 'OR':
+                    $query = $query . ' OR ';
+                    break;
+                default:
+                    break;
+            }
+        else
+            $query = $query . ' AND ';
+
+        return $query;
+    }
+
+    public function or($where) {
+        $query = '';
+        $isAdd = false;
+        foreach ($where as $item) {
+            if ($isAdd)
+                $query = $this->prepareQuery($query, $item);
+            $query = $this->writeQuery($query, $item);
+            $isAdd = true;
+        }
+
+        return [
+            "type" => "OR",
+            "query" => $query
+        ];
     }
     
     public function typeWhere($typeWhere, $attribute, $value = null) { 

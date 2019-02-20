@@ -78,6 +78,14 @@ interface DriverDB {
      * @return  array
      */
     public function where($model, $where);
+
+    /**
+     * Método DB SQL, que permite acomodar en un array los filtros de where para la clausula OR($where)
+     *
+     * @param  array  $where
+     * @return  array
+     */
+    public function or($where);
     
     /**
      * Método DB SQL, que permite actualizar un objeto relacional, perteneciente al modelo Rest en la base de datos destino.

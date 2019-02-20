@@ -91,6 +91,10 @@ class Kernel {
     public static function where($model, $where) {
         return self::$kernel->providerORM->where($model, $where);
     }
+
+    public static function OR($where) {
+        return self::$kernel->providerORM->OR($where);
+    }
     
     public static function update($data, $tuples, $model, $id) {   
         return self::$kernel->providerORM->update($data, $tuples, $model, $id);

@@ -41,6 +41,10 @@ class Newler {
     public function where($model, $where) {
         return $this->driverDB->where($model, $where);
     }
+
+    public function OR($where) {
+        return $this->driverDB->OR($where);
+    }
     
     public function update($data, $tuples, $model, $id) {
         if(is_numeric($id))
