@@ -17,7 +17,7 @@
  */
 
 try {
-    $dotenv = new Dotenv\Dotenv(REAL_PATH);
+    $dotenv = Dotenv\Dotenv::create(REAL_PATH);
     $dotenv->load();
 } catch(Exception $exception) {
     killer('500');
