@@ -167,8 +167,7 @@ class Auth {
     
     public $id;
     public $email;
-    public $idRol;
-    public $nombre;
+    public $name;
 
     private function __construct() {}
     
@@ -182,9 +181,9 @@ class Auth {
     
     public function __wakeup() { killer('500'); }
     
-    public function init($id, $nombre, $email) {
+    public function init($id, $name, $email) {
         self::$auth->id = $id;
-        self::$auth->nombre = $nombre;
+        self::$auth->name = $name;
         self::$auth->email = $email; 
     }
 }
