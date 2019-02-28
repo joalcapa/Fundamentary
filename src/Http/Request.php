@@ -8,6 +8,7 @@ class Request {
     
     private $id;
     private $url;
+    private $urlApi;
     private $inputs;
     private $idRol;
     private $model;
@@ -58,6 +59,8 @@ class Request {
 
         if($this->url == '/api/auth/reset-password' || $this->url == '/api/auth/reset-password/' )
             $this->resetPassword = true;
+
+        $this->urlApi = str_replace('/api', '', $this->url);
 
         if(strpos($this->url, '?')) 
             strstr($this->url, '?', true);
@@ -249,5 +252,14 @@ class Request {
      */
     public function isRootUrl() {
         return $this->rootUrl;
+    }
+
+    /**
+     * Retorno de url
+     *
+     * @return string
+     */
+    public function getUrlApi() {
+        return strtolower($this->urlApi);
     }
 }

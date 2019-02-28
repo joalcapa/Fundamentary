@@ -3,6 +3,7 @@
 namespace Joalcapa\Fundamentary\App;
 
 use Joalcapa\Fundamentary\Dir\Dir as Dir;
+use Joalcapa\Fundamentary\Api\Api as Api;
 use Joalcapa\Fundamentary\Auth\Auth as Auth;
 use Joalcapa\Fundamentary\Rest\Rest as Rest;
 use Joalcapa\Fundamentary\Database\Kernel as KernelDB;
@@ -57,7 +58,7 @@ class Application {
                 killer('1');
 
             $data = Auth::initAuth($request);
-            $data ? $this->kernels[Dir::kernelHttp()]->makeResponse('200', $data) : Rest::Apply();
+            $data ? $this->kernels[Dir::kernelHttp()]->makeResponse('200', $data) : $this->apiRest();
 
             if(!$this->kernels[Dir::kernelHttp()]->response())
                 $this->kernels[Dir::kernelHttp()]->makeResponse('404');
@@ -76,5 +77,10 @@ class Application {
      */
     public function makeResponse($data) {
         $this->kernels[Dir::kernelHttp()]->makeResponse($data);
+    }
+
+    public function apiRest() {
+        Rest::Apply();
+        Api::Apply();
     }
 }

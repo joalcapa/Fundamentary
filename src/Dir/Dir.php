@@ -62,6 +62,15 @@ class Dir {
     }
 
     /**
+     * Directorio del archivo Api, definición de rutas.
+     *
+     * @return  string
+     */
+    public static function api() {
+        return REAL_PATH.'\\Routes\\api.php';
+    }
+
+    /**
      * Directorio del modelo Rest.
      *
      * @param  string  $model
