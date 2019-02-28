@@ -42,7 +42,7 @@ class Api {
                 );
 
             if($data === $request->getInteractionsRequest()) {
-                $routeController = Dir::controller($controller);
+                $routeController = Dir::apiControllers($controller);
                 $ctr = new $routeController();
                 $data = $ctr->$methodController($data);
                 KernelHttp::makeResponse('200', $data);
