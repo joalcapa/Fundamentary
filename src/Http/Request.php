@@ -18,6 +18,7 @@ class Request {
     private $requiredParameter;
     private $relationalParameter;
     private $interactionsRequest;
+    private $interactionsRequestForApi;
     private $rootUrl;
     
     public function __construct() {
@@ -44,6 +45,7 @@ class Request {
         if(isset($json)) {
             $this->inputs = json_decode($json);
             $this->interactionsRequest = new InteractionsRequest($this->inputs, $this->relationalParameter, $this->requiredParameter, $this->relationalModel);
+            $interactionsRequestForApi = new \stdClass();
         }
     }
     
@@ -155,11 +157,11 @@ class Request {
      *
      * @return  array
      */
-    public function bodyRequest() {
+    public function bodyRequest($forApi = false) {
         $json = file_get_contents('php://input');
         $data = json_decode($json);
 
-        $requestWithBodyRequest = $this->getInteractionsRequest();
+        $forApi ? $requestWithBodyRequest = $this->getInteractionsRequestForApi() : $requestWithBodyRequest = $this->getInteractionsRequest();
         foreach ($data as $key => $value)
             $requestWithBodyRequest->$key = $value;
 
@@ -243,6 +245,15 @@ class Request {
         if(isset($this->interactionsRequest))
             return $this->interactionsRequest;
         killer('500');
+    }
+
+    /**
+     * Retorno del objeto request que interacciona con el modeloRest.
+     *
+     * @return  Fundamentary\Http\Interactions\Request\Request
+     */
+    public function getInteractionsRequestForApi() {
+        return $this->interactionsRequestForApi;
     }
 
     /**

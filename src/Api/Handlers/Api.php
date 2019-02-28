@@ -28,7 +28,7 @@ class Api {
      * @param  \Fundamentary\Http\Request  $request
      */
     public static function explorer($route, $controller, $closure = null, $request) {
-        $data = $request->getInteractionsRequest();
+        $data = $dataAux = $request->bodyRequest(true);
         $controller = explode('@', $controller);
         $methodController = $controller[1];
         $controller = $controller[0];
@@ -41,7 +41,7 @@ class Api {
                     array('request' => $data)
                 );
 
-            if($data === $request->getInteractionsRequest()) {
+            if($data === $dataAux) {
                 $routeController = Dir::apiControllers($controller);
                 $ctr = new $routeController();
 
