@@ -45,7 +45,7 @@ class Api {
                 $routeController = Dir::apiControllers($controller);
                 $ctr = new $routeController();
 
-                if(!property_exists($ctr, $methodController)) killer('404');
+                if(!method_exists($ctr, $methodController)) killer('404');
 
                 $data = $ctr->$methodController($data);
                 KernelHttp::makeResponse('200', $data);
