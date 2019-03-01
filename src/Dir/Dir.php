@@ -48,8 +48,8 @@ class Dir {
      * @param  string  $model
      * @return  string
      */
-    public static function middleware($model) {
-        return REAL_PATH.'\\Api\\Middlewares\\'.$model.'Middleware.php';
+    public static function middleware($middleware) {
+        return REAL_PATH.'\\Api\\Middlewares\\'.$middleware.'Middleware.php';
     }
     
     /**
@@ -106,8 +106,8 @@ class Dir {
      * @param  string  $model
      * @return  string
      */
-    public static function apiMiddlewares($model) {
-        return 'Gauler\\Api\\Middlewares\\'.$model.'Middleware';
+    public static function ApiMiddleware($middleware) {
+        return 'Gauler\\Api\\Middlewares\\'.$middleware.'Middleware';
     }
     
     /**

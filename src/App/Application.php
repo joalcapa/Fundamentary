@@ -49,6 +49,7 @@ class Application {
     public function init() {
         try {
             require_once (REAL_PATH . '\\vendor\\joalcapa\\fundamentary\\src\\Magics.php');
+            require(__DIR__.'/Middlewares/Middleware.php');
             KernelDB::getKernel();
 
             $kernelHttp = $this->kernels[Dir::kernelHttp()];
