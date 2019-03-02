@@ -213,8 +213,10 @@ class Mysql implements DriverDB {
         $this->query(
             'CREATE TABLE '. $model .' (
             id INT NOT NULL AUTO_INCREMENT,'
-            . $this->prepareAttributesForCreateTable($attributes) .'
-            ,PRIMARY KEY (id));',
+            . $this->prepareAttributesForCreateTable($attributes) .',
+            created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            update_date TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
+            PRIMARY KEY (id));',
             false
         );
     }
